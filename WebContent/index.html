@@ -2,9 +2,37 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>HomePage</title>
 </head>
+<style>
+   form input{
+       padding:5px 0 5px 0;
+    }
+</style>
 <body>
+<H2 align=left> LOGIN!!</H2>
+<FORM action=Login1 method="post">
+USERNAME: <INPUT type="text" id="email" name="username">
+<br>
+PASSWORD: <INPUT type="password" name="password">
+<br>
+<INPUT type="submit" id="login" value="login">
+</FORM>
+<H3 align=left>Dont have an account, create one</H3>
+<FORM action="signup.html">
+<input type="submit" value="Create new account">
+</FORM>
+<script>
+     document.getElementById("login").onclick(function(){
+     function isValidEmailAddress(email){
+         var re = /\S+@\S+\.\S+/;
+         return re.test(email);
+     }
+     var email= document.getElementById("email").innerHTML();
+     alert(email);
+     
 
+})
+</script>
 </body>
 </html>
