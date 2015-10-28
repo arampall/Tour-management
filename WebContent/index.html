@@ -4,35 +4,20 @@
 <meta charset="ISO-8859-1">
 <title>HomePage</title>
 </head>
-<style>
-   form input{
-       padding:5px 0 5px 0;
-    }
-</style>
-<body>
+<body background="http://2.bp.blogspot.com/-bpCr9dBLw4Y/Tr1f3pDiqkI/AAAAAAAAA6M/DEihidF19cA/s1600/love+City-Wallpaper-geeksbowl.com-High-Definition-1080p-HD-30.jpg">
+<H1 align=center>TOURISTFEST-ALL IN ONE</H1>
 <H2 align=left> LOGIN!!</H2>
-<FORM action=Login1 method="post">
-USERNAME: <INPUT type="text" id="email" name="username">
+
+<FORM action=Login1 method="get">
+USERNAME: <INPUT type="text" name="username">
 <br>
 PASSWORD: <INPUT type="password" name="password">
 <br>
-<INPUT type="submit" id="login" value="login">
+<INPUT type="submit" value="login">
 </FORM>
-<H3 align=left>Dont have an account, create one</H3>
+<H2 align=left>Dont have an account,create one</H2>
 <FORM action="signup.html">
 <input type="submit" value="Create new account">
 </FORM>
-<script>
-     document.getElementById("login").onclick(function(){
-     function isValidEmailAddress(email){
-         var re = /\S+@\S+\.\S+/;
-         return re.test(email);
-     }
-     var email= document.getElementById("email").innerHTML();
-     alert(email);
-     
-
-})
-</script>
 </body>
 </html>
