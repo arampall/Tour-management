@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Places</title>
+</head>
+<style>
+.ssdi{
+  height:168px;
+  width:300px;
+  
+}
+.name{
+   font-size:1.2em;
+   text-align:center;
+   border:1px solid black;
+   background-color:#A99696;
+}
+img{
+height:168px;
+width:300px;
+}
+#ssd
+{
+ height:168px;
+  width:300px;
+  float:left;
+}
+button
+{
+margin:0;
+padding:0;
+}
+
+input
+{
+float:right;
+position:relative;
+}
+iframe{
+float:right;
+}
+</style>
+<body>
+<script>
+function go(loc) {
+    document.getElementById("dest").src = loc;
+                 }
+</script>
+<form action="booking.jsp">
+<div>
+<iframe id="dest" name="destinations" src=" " width="400" height="600"></iframe>
+<input type="submit" value="book this destination"  name="book"></div>
+</form>
+<table id="DestinationsTable">
+<tr>
+
+<td>
+
+<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT9beBrN5VVOgzIMG0R9OWOI3GIti-hOyVIHV5pds2u6Ok54U0D"/>
+<div class="name">
+<button type="button" onclick="go('places/paris.pdf#zoom=150')"> Paris</button>
+</div>
+</td>
+
+<td>
+
+<img src="http://www.gotmesh.org/wp-content/uploads/2014/07/63950-640x360-london-icons2-640-300x168.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/LONDON.pdf#zoom=150')">London</button>
+</div>
+</td>
+
+<td>
+<img src="http://newallpaper.net/wp-content/uploads/2015/04/new-york-wallpaper-widescreen-hd-wallpapers.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/NEWYORK.pdf#zoom=150')">
+ New York
+</button>
+</div>
+</td>
+</tr>
+
+<tr>
+<td>
+<img src="http://static1.squarespace.com/static/554b9c72e4b0b97e40998182/t/5591e7a5e4b0358385fe8545/1435625383671/Madrid-Ville.jpg?format=1500w"/>
+<div class="name">
+<button type="button" onclick="go('places/MADRID.pdf#zoom=150')">
+ Madrid
+</button>
+</div>
+</td>
+
+<td>
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Melbourne_by_night.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/MELBOURNE.pdf#zoom=150')">
+ Melbourne
+</button>
+</div>
+</td>
+
+<td>
+<img src="https://www.euruni.edu/blog/wp-content/uploads/2014/05/Beijing.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/BEIJING.pdf#zoom=150')">
+ Beijing
+</button>
+</div>
+</td>
+</tr>
+
+<tr>
+<td>
+<img src="http://www.telegraph.co.uk/travel/hotel/article129671.ece/ALTERNATES/w620/rometravelguide5.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/ROME.pdf#zoom=150')">
+ Rome
+</button>
+</div>
+</td>
+
+<td>
+<img src="http://i.telegraph.co.uk/multimedia/archive/02855/barcelona-spring_2855549b.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/Barcelona.pdf#zoom=150')">
+ Barcelona
+</button>
+</div>
+</td>
+<td>
+
+<img src="http://www.photographyblogger.net/wp-content/uploads/2009/10/Shanghai-China29.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/shanghai.pdf#zoom=150')">
+ Shanghai
+</button>
+
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQGugVKHzHmIwRJWciFceO1oolcQ28N8PwoI3MNmdfLlCPgrFCB"/>
+<div class="name">
+<button type="button" onclick="go('places/munich.pdf#zoom=150')">
+ Munich
+</button>
+
+</div>
+</td>
+<td>
+<img src="http://i.telegraph.co.uk/multimedia/archive/02256/expert-hongkong_2256037b.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/Hongkong.pdf#zoom=150')">
+ HongKong
+</button>
+
+</div>
+</td>
+<td>
+<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQWVitpq0FG73UdSrWgidzQXrhxD3aL1mDuQUill8a-BhpEX63r"/>
+<div class="name">
+<button type="button" onclick="go('places/Singapore.pdf#zoom=150')">
+ Singapore
+</button>
+
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<img src="http://www.mrcapetown.co.za/wp-content/uploads/2011/08/cape-town-photo1.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/capetown.pdf#zoom=150')">
+ CapeTown
+</button>
+
+</div>
+</td>
+<td>
+<img src="http://www.telegraph.co.uk/travel/destination/article127052.ece/ALTERNATES/w620/amsterdam.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/Amsterdam.pdf#zoom=150')">
+ Amsterdam
+</button>
+
+</div>
+</td>
+<td>
+<img src="http://images.nationalgeographic.com/wpf/media-live/photos/000/026/cache/tokyo-kabukicho_2617_600x450.jpg"/><div class="name">
+<button type="button" onclick="go('places/tokyo.pdf#zoom=150')">
+ Tokyo
+</button>
+
+</div>
+</td>
+<tr>
+<td>
+<img src="http://unclesamsmisguidedchildren.com/wp-content/uploads/2015/06/jerusalem.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/jerusalem.pdf#zoom=150')">
+ Jerusalem
+</button>
+</div>
+</td>
+<td>
+<img src="http://www.sydney.com/sites/default/files/sydney-harbour-and-opera-house_2.jpg">
+<div class="name">
+<button type="button" onclick="go('places/sydney.pdf#zoom=150')">
+ Sydney
+</button>
+
+</div>
+</td>
+<td>
+<img src="http://blog.eurail.com/wp-content/uploads/2013/05/florence.jpg"/>
+<div class="name">
+<button type="button" onclick="go('places/florence.pdf#zoom=150')">
+ Florence
+</button>
+
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<img src="http://dixiedelightsonline.com/wp-content/uploads/2015/09/los-angeles-926_1.jpg">
+<div class="name">
+<button type="button" onclick="go('places/losangeles.pdf#zoom=150')">
+ LosAngeles
+</button>
+
+</div>
+</td>
+<td>
+<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQCg4YuBp2swaqCfYBktuxj8g9swTuq2Nyn46g17jaj7BpPcY2KzA"/><div class="name">
+<button type="button" onclick="go('places/milan.pdf#zoom=150')">
+ Milan
+</button>
+
+</div>
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>

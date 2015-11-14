@@ -1,70 +1,75 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
-<title>View your profile</title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="jquery-min.js"></script>
 <style>
    #wrapper{
       margin:0 auto;
     }
-   form{
+   #view{
      font-family:helvetica;
      background-color:white;
       width:450px;
-      height:300px;
-      border: 2px solid black;
+      height:400px;
+      border: 1px solid black;
       border-radius:2px;
       padding:30px 10px 0 20px;
+      position:relative;
+      left:400px;
+      top:80px;
     }
-
-    input{
-        border: 3px solid grey;
-        padding-left:2px;
-        margin-bottom:3px;
-        border-radius:5px;
-        font-size:1.1em;
-    }
-    #submit{
-       margin:15px 20px 0 100px;
-    }
-    table{
-       padding:30px 0 0 40px;
-    }
-    td{
-       font-weight:bold;
-      width:150px;
+    #content{
+       background-color:white;
+       padding:10px 0 10px 20px;
+       height:250px;
+     } 
+   label{
+      font-weight:bold;
+      margin-right:100px;
+      width:100px;
       float:left;
-      padding-top:3px;
+   }
+   .submit{
+      float:left;
+      margin:10px 0 10px 210px;
+   }
+   .cancel{
+     
+      margin:10px 0 10px 10px;
+   }
+   form{
+     display:none;
+     float:left;
+   }
+   .field{
+      margin:10px 0 10px 0;
+      display:block;
     }
-    #edit{
-      float:right;
-      margin:0 10px 20px 0;
-      font-size:0.8em;
+   .button{
+      float:left;
+      padding:0;
+      margin=0;
+      display:none;
     }
-    #view{
-       display:block;
-    }
-    a{
-       text-decoration:none;
+    .field:hover .button{
+         display:block;
      }
-    h3{
-      border-bottom:3px solid black;
-    } 
+     
+   
 </style>
 </head>
-<body background="http://www.hdwallpapers.in/walls/city_nights__lights-wide.jpg">
 
-
-<div id="wrapper">
-   <form>
+<body>
+ <div id="wrapper">
+   <div id="view">
      <h3>Profile</h3>
-     <div id="view">
-        <button id="edit"><a href="edit.html">Edit Profile</a></button>
-        <table>
-        <%@page import  = "java.util.*"%>
+        <div id="content">
+<%@page import  = "java.util.*"%>
 <%@page import ="java.io.IOException" %>
 <%@page import ="java.io.PrintWriter" %>
 <%@page import ="java.sql.Connection"  %>
@@ -79,23 +84,14 @@
 <%@page import ="javax.servlet.ServletException"  %>
 <%@page import ="javax.servlet.annotation.WebServlet"  %>
 <%@page import ="java.sql.PreparedStatement" %>
-
-<% 
+<%@page import="tour.server.DBConnection" %>
+<%
 try
 {
 int unique=0;
-Class.forName("com.mysql.jdbc.Driver");
-System.out.println("Driver found");
-	
-	
-	String url="jdbc:mysql://localhost/mydb";
-	String user="indra";
-	String password="tp123";
-	Connection con=null;
-	
-	
-		con=DriverManager.getConnection(url, user, password);
-		System.out.println("\n Connected successfully");
+Connection con;
+DBConnection db= new DBConnection();
+con= db.ConnectionManager();
 		
          
 		Cookie[] cookies = null;
@@ -103,56 +99,18 @@ System.out.println("Driver found");
 	      cookies = request.getCookies(); 
 	      String id;
 	      int value;
-	      /*for (int i = 0; i < cookies.length; i++){
-	         Cookie cookie = cookies[i];
-	          
-	          id=cookie.getName();
-	          value=Integer.parseInt(cookie.getValue());
-	          if(id.equals("id"))
-	          {
-	        	  Cookie cookie1=cookies[i];
-	    	      id=cookie1.getName();
-	              value=Integer.parseInt(cookie1.getValue());
-	              System.out.println(id);
-	              System.out.println(value);
-	              PreparedStatement pstmt=null;
-	    	      String sqlString = "select firstname,lastname,phoneno,address,password from customer where id=?";
-	    	      pstmt = con.prepareStatement(sqlString);
-	        	  pstmt.setInt(1, value);
-	        	  ResultSet rs = pstmt.executeQuery();
-	        	  String firstname;
-	    	      String lastname;
-	    	      String phoneno;
-	    	      String address;
-	    	      String password1;
-	    	      
-	    	      while(rs.next())
-	    	      {
-	    	    	  firstname=rs.getString("firstname");
-	    	    	  lastname=rs.getString("lastname");
-	    	    	  phoneno=rs.getString("phoneno");
-	    	    	  address=rs.getString("address");
-	    	    	  password1=rs.getString("password");
-	    	    	  out.println("<tr><td>First Name</td><td>"+firstname+"</td></tr>");
-	    	          out.println("<tr><td>Last Name</td><td>"+lastname+"</td></tr>");
-	    	          out.println("<tr><td>PhoneNumber</td><td>"+phoneno+"</td></tr>");
-	    	          out.println("<tr><td>Address</td><td>"+address+"</td></tr>");
-	    	          out.println("<tr><td>Password</td><td>"+password1+"</td><tr>");
-	    	      }  
-	    	     
-	    	      break;
-	          }
-	          
-	       }*/
+	      
 	      Cookie cookie1=cookies[1];
 	      id=cookie1.getName();
+	      //System.out.println("id is"+id);
           value=Integer.parseInt(cookie1.getValue());
-          System.out.println(id);
-          System.out.println(value);
+          //System.out.println(id);
+          //System.out.println(value);
 	      PreparedStatement pstmt=null;
 	      String sqlString = "select firstname,lastname,phoneno,address,password from customer where id=?";
 	      pstmt = con.prepareStatement(sqlString);
     	  pstmt.setInt(1, value);
+    	  //System.out.println("coming now here");
     	  ResultSet rs = pstmt.executeQuery();
 	      
 	      String firstname;
@@ -161,23 +119,74 @@ System.out.println("Driver found");
 	      String address;
 	      String password1;
 	      
-	      while(rs.next())
-	      {
-	    	  firstname=rs.getString("firstname");
-	    	  lastname=rs.getString("lastname");
-	    	  phoneno=rs.getString("phoneno");
-	    	  address=rs.getString("address");
-	    	  password1=rs.getString("password");
-	    	  out.println("<tr><td>First Name</td><td>"+firstname+"</td></tr>");
-	          out.println("<tr><td>Last Name</td><td>"+lastname+"</td></tr>");
-	          out.println("<tr><td>PhoneNumber</td><td>"+phoneno+"</td></tr>");
-	          out.println("<tr><td>Address</td><td>"+address+"</td></tr>");
-	          out.println("<tr><td>Password</td><td>"+password1+"</td><tr>");
-	      }  
-	      
-	      
-}
+	   
+	    	  
+	    	  while(rs.next())
+		      {
+	    		  firstname=rs.getString("firstname");
+		    	  lastname=rs.getString("lastname");
+		    	  phoneno=rs.getString("phoneno");
+		    	  address=rs.getString("address");
+		    	  password1=rs.getString("password");
+		    	  System.out.println("hi");
+		      %>
 
+          
+
+        <br/><div id="fname" class="field"><label>First Name</label><strong><%out.println(firstname); %></strong><button class="button"
+onclick="edit('fname','first')"><img src="editpen.jpg"/></button></div>
+         <form id=first action=ChangeFirstName method="post">
+         <label>First Name</label>
+         <input type="text" name="firstname"><br/>
+         <input type="submit" value="Submit" class="submit">
+         <button class="cancel">Cancel</button>
+         </form> 
+
+
+         <br/><div id="lname" class="field"><label>Last Name</label><strong><%out.println(lastname); %></strong><button class="button" onclick="edit('lname','last')"><img src="editpen.jpg"/></button></div>
+         <form id="last" action="ChangeLastName" method="post">
+         <label>Last Name</label>
+         <input type="text" name="lastname"><br/>
+         <input type="submit" value="Submit" class="submit">
+         <button class="cancel">Cancel</button>
+         </form>
+
+
+         <br/><div id="mno" class="field"><label>Mobile</label><strong><%out.println(phoneno); %></strong><button class="button" onclick="edit('mno','mobile')"><img src="editpen.jpg"/></button></div>
+         <form id="mobile" action=ChangeMobileNumber method="post">
+         <label>Mobile</label>
+         <input type="text" name="mobilenumber"><br/>
+         <input type="submit" value="Submit" class="submit">
+         <button class="cancel">Cancel</button>
+         </form>
+
+
+         <br/><div id="addr" class="field"><label>Address</label><strong><%out.println(address); %></strong><button class="button" onclick="edit('addr','place')"><img src="editpen.jpg"/></button></div>
+         <form id="place" action=ChangeAddress method="post">
+         <label>Address</label>
+         <input type="text" name="address"><br/>
+         <input type="submit" value="Submit" class="submit">
+         <button class="cancel">Cancel</button>
+         </form>   
+
+        </div>
+   </div>
+ </div>
+<script>
+       var other=false
+       function edit(a,b){
+         
+          if(other==true){
+           $(".field").css("display","block");
+           $("form").css("display","none");
+          }
+          document.getElementById(a).style.display="none";
+          document.getElementById(b).style.display="block"; 
+          other=true;
+       }
+ 
+</script>
+<%}} 
          catch(SQLException e)
 {
 	      System.out.println(e);
@@ -188,14 +197,7 @@ System.out.println("Driver found");
 	      System.out.println("Driver not found");
 }
          
-         
-         %>
-            
-            
-            
-        </table> 
-     </div>
-   </form>
- </div>
+%>         
+
 </body>
 </html>

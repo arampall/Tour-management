@@ -1,13 +1,12 @@
-package org.indraneel.sample;
+package tour.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.sql.PreparedStatement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javax.activation.*;
+import tour.process.SignUpProcess;
 
 /**
  * Servlet implementation class SignUp
@@ -26,37 +25,19 @@ public class SignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Inside Signup");
 		try {
 			 int unique=0;
-		     Class.forName("com.mysql.jdbc.Driver");
-		     System.out.println("Driver found");
-				
-				
-				String url="jdbc:mysql://localhost/mydb";
-				String user="indra";
-				String password="tp123";
-				Connection con=null;
-				
-				
-					con=DriverManager.getConnection(url, user, password);
-					System.out.println("\n Connected successfully");
-					Statement stmt = con.createStatement();
+			 Connection con;
+			 DBConnection db= new DBConnection();
+			 con= db.ConnectionManager();
+			 Statement stmt = con.createStatement();
 					
-				
-				
-				
-				
+					
+								
 		// TODO Auto-generated method stub
 		String username=request.getParameter("usermail");
 		String password1=request.getParameter("userpass");
@@ -69,8 +50,9 @@ public class SignUp extends HttpServlet {
 		System.out.println(birth);		
        
         System.out.println(no);
+        int flag=0;
 				
-        String sql = "SELECT * FROM login";
+        /*String sql = "SELECT * FROM login";
 		ResultSet rs = stmt.executeQuery(sql);
 		
         int flag=0;
@@ -86,21 +68,11 @@ public class SignUp extends HttpServlet {
 	        	 flag=1;
 	        	 break;
 	         }
-		}
-		
+		}*/
+		flag= SignUpProcess.CheckUserName(username, con);
         if(flag==0)
         {
-        	String sql1="SELECT * from id";
-    		
-    		ResultSet rs1=stmt.executeQuery(sql1);
-    		while(rs1.next())
-    		{
-    		unique=Integer.parseInt(rs1.getString("no"));
-    		unique=unique+1;
-    		}
-    		
-    		String query2="UPDATE id set no=no+1" ;
-    		stmt.executeUpdate(query2);
+        	
         String query = "INSERT INTO customer(firstname,lastname,emailid,phoneno,dob,address,password,id)" + 
 		           "VALUES ('" + fname + "', '" + lname + "', '" + username + "','"+no+"','"+birth+"','"+address+"','"+password1+"','"+unique+"')";
 		
@@ -120,11 +92,34 @@ public class SignUp extends HttpServlet {
         System.out.println("Record has been inserted successfully in Login Table");
         } else {
         System.out.println("Inserting record get failure");
-        }	 
+        }
+        //----------------------------------------------------------
+        /*String sql1="SELECT * from id";
+		
+		ResultSet rs1=stmt.executeQuery(sql1);
+		while(rs1.next())
+		{
+		unique=Integer.parseInt(rs1.getString("no"));
+		unique=unique+1;
+		}
+		
+		String query2="UPDATE id set no=no+1" ;
+		stmt.executeUpdate(query2);*/
+        //-------------------------------------------------------------
+          PreparedStatement pstmt=null;
+	      String sqlString = "select id from customer where emailid=?";
+	      pstmt = con.prepareStatement(sqlString);
+  	      pstmt.setString(1, username);
+  	      ResultSet rs1 = pstmt.executeQuery();
+  	      while(rs1.next())
+		  {
+		     unique=Integer.parseInt(rs1.getString("id"));
+		   }
           Cookie id = new Cookie("id",Integer.toString(unique) );
           Cookie login=new Cookie("login","1");
           id.setMaxAge(60*60*24);
           login.setMaxAge(60*60*24);
+          System.out.println(unique);
           response.addCookie( id );
           response.addCookie( login );
           
@@ -133,9 +128,9 @@ public class SignUp extends HttpServlet {
           
           
           
-          PrintWriter out=response.getWriter();
   		  response.setContentType("text/html");
-        out.println("<html><body background=http://fullhdpictures.com/wp-content/uploads/2015/03/HD-New-York-Pictures.jpg><h1> Welcome back</h1><a href=view.jsp>View profile </a></body></html>");
+  		  response.sendRedirect("homepage.html");
+       // out.println("<html><body background=http://fullhdpictures.com/wp-content/uploads/2015/03/HD-New-York-Pictures.jpg><h1> Welcome back</h1><a href=view.jsp>View profile </a></body></html>");
          		
         }
         else
