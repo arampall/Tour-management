@@ -34,7 +34,7 @@
      
 </style>
 </head>
-<body background="http://hdcutepics.com/wp-content/uploads/2014/08/nature-hd-wallpapers-1080p-pack.jpg">
+<body>
 <div id="content">
     <table align=center>
     <tr><th>Source</th><th>Destination</th><th>Flight</th><th>Date Of Departure</th><th>Time Of Travel</th><th>Price</th><th>Accomodation Availed</th></tr>
@@ -53,7 +53,7 @@
 <%@page import ="javax.servlet.ServletException"  %>
 <%@page import ="javax.servlet.annotation.WebServlet"  %>
 <%@page import ="java.sql.PreparedStatement" %>
-<%@page import="tour.server.DBConnection" %>
+<%@page import="tour.connection.DBConnection" %>
 <%
 try {
 	Connection con;

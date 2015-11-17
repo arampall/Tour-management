@@ -5,8 +5,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Start a new Trip</title>
+<style type="text/css">
+   body{
+   background-color:white;
+   }
+   form{
+     margin:20px 30px 20px 20px;
+     padding-top:70px;
+     font-family:helvetica;
+   }
+   select{
+     float:right;
+     width:205px;
+     height:25px;
+   }
+   input{
+      float:right;
+      width:200px;
+      height:20px;
+   }
+   label{
+      font-weight:bold;
+      position:relative;
+      top:5px;
+  
+   }
+   .isubmit{
+      margin:50px 0 0 50px;
+      float:left;
+      width:150px;
+      height:30px;
+   }
+  
+</style>
 </head>
-<body background="https://wallpaperscraft.com/image/eiffel_tower_paris_france_night_hdr_85518_1920x1080.jpg ">
+<body>
 
 <%@page import  = "java.util.*"%>
 <%@page import ="java.io.IOException" %>
@@ -23,7 +56,7 @@
 <%@page import ="javax.servlet.ServletException"  %>
 <%@page import ="javax.servlet.annotation.WebServlet"  %>
 <%@page import ="java.sql.PreparedStatement" %>
-<%@page import="tour.server.DBConnection" %>
+<%@page import="tour.connection.DBConnection" %>
 <%@page session="false" %>
 
 <% 
@@ -46,8 +79,8 @@ try
   	      ResultSet rs_destination=pstmt.executeQuery();
   	      
   	      %>
-		  <form action=ShowFlights.jsp method=post>
-		  <div>Source
+		  <form action=ShowFlights.jsp method=post target="_parent">
+		  <div><label>Source</label>
 		  <select name=source>
 		  <%
 		  while(rs_source.next())
@@ -57,12 +90,12 @@ try
 			 <option><%out.println(Source); %></option>
 	
 		  <%
-		  System.out.println("hi");
 		  }%>
   	      </select>
   	      </div>
   	      <br>
-  	      <div>Destination
+  	      <div>
+  	      <label>Destination</label>
   	      <select name=destination>
   	      <%
   	      while(rs_destination.next())
@@ -75,17 +108,20 @@ try
   	      <%} %>
   	      
   	      </select>
-  	      </div>
+  	      </div><br>
   	      <div>
-	      Select the date of your travel:<input type=date name=dot required/>
+	      <label>Journey Date</label>
+	      <input type=date name=dot id="date" required/>
 	      </div>
 	      <br/>
 	      <div>
-	      Enter number of Passengers:<input type=text name=number required/>
+	      <label>Number of Passengers</label><input type=number name=number required/>
 	      </div>
 	      <br/>
-  	      <input type=submit value=next>
+  	      <input class="isubmit" type=submit value="Search Flights" style="background-color:#FACC2E">
+  	      <button type="reset" class="isubmit" onClick=self.close() >Cancel</button>     
   	      </form>
+  	             
 		<% 
 }
 
@@ -102,6 +138,24 @@ catch(ClassNotFoundException e)
 		
 %>
 
-
+<script>
+    var d= new Date();
+    var dd=d.getDate();
+    var mm=d.getMonth()+1;
+    var yyyy=d.getFullYear();
+    if(dd<10){
+    	dd='0'+dd;
+    }
+    if(mm<10){
+    	mm='0'+mm;
+    }
+    d=yyyy+'-'+mm+'-'+dd;
+    self.document.getElementById("date").value=d;
+    self.document.getElementById("date").min=d;
+    function close(){
+        var frame=window.parent.document;
+        frame.getElementById("frame").style.display="none";
+    }    
+</script>
 </body>
 </html>

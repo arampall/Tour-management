@@ -1,14 +1,17 @@
 package tour.test;
-import tour.connection.DBConnection;
-import tour.process.LoginProcess;
+
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.junit.Test;
-import java.sql.*;
 
-public class LoginProcessTest {
+import tour.connection.DBConnection;
+
+import tour.process.*;
+
+public class UniqueUsernameTest {
 
 	@Test
 	public void test() {
@@ -17,10 +20,8 @@ public class LoginProcessTest {
 			Connection con;
 			DBConnection db = new DBConnection();
 			con = db.ConnectionManager();
-
-			a = LoginProcess.checkLoginDetails("achyut.9316@gmail.com", "1234", con);
-
-			assertEquals(1, a);
+			a= SignUpProcess.CheckUserName("achyut.9316@gmail.com",con);
+			assertEquals(0, a);
 		} 
 		
 		catch (SQLException e) {
@@ -32,4 +33,8 @@ public class LoginProcessTest {
 		}
 
 	}
-}
+
+
+	}
+
+

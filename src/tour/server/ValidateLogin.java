@@ -2,6 +2,8 @@ package tour.server;
 import java.sql.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import tour.connection.DBConnection;
 import tour.process.LoginProcess;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

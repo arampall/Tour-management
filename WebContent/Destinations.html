@@ -5,11 +5,6 @@
 <title>Places</title>
 </head>
 <style>
-.ssdi{
-  height:168px;
-  width:300px;
-  
-}
 .name{
    font-size:1.2em;
    text-align:center;
@@ -34,23 +29,52 @@ padding:0;
 
 input
 {
-float:right;
-position:relative;
+ position:absolute;
+ right:10px;
+ bottom:10%;
+ width:200px;
+ height:40px;
+ background-color:#088A08;
+ font-size:1.2em;
+ font-weight:bold;
 }
-iframe{
+#dest{
 float:right;
+overflow:hidden;
+display:none;
+height:500px;
 }
+#frame{
+   position:absolute;
+   z-index:3;
+   top:150px;
+   left:450px;
+   height:400px;
+   width:500px;
+   border:1px solid black;
+   display:none;
+ }
 </style>
 <body>
 <script>
-function go(loc) {
+  function go(loc) {
+	document.getElementById("dest").style.display="block";
     document.getElementById("dest").src = loc;
-                 }
+  }
+  function frame(){
+  	document.getElementById("frame").style.display="block";
+  	
+  	
+  	
+  }
+  
 </script>
-<form action="booking.jsp">
+<iframe id="frame" src=" " name="createtrip"></iframe>
+<div id="page">
+<form action="CreateTrip.jsp" target="createtrip">
 <div>
 <iframe id="dest" name="destinations" src=" " width="400" height="600"></iframe>
-<input type="submit" value="book this destination"  name="book"></div>
+<input type="submit" onclick="frame()" value="Book destination"  name="book"></div>
 </form>
 <table id="DestinationsTable">
 <tr>
@@ -243,6 +267,6 @@ function go(loc) {
 </td>
 </tr>
 </table>
-</form>
+</div>
 </body>
 </html>

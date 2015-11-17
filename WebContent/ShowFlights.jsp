@@ -6,7 +6,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Select Your Flight</title>
 </head>
-<body>
+<style>
+  table{
+    text-align:center;
+  }
+  td{
+     margin:0;
+     background-color:white;
+     border-left:1px solid black;
+     text-size:1.1em;
+     padding:10px;
+  }
+  th{
+     padding:10px;
+     font-size:1.2em;
+     background-color:#E6E6E6;
+  }
+  #submit{
+     width:100px;
+     height:30px;
+     align:center;
+     margin-left:500px;
+     font-weight:bold;
+  }
+  
+</style>
+<body background="http://hdcutepics.com/wp-content/uploads/2014/08/nature-hd-wallpapers-1080p-pack.jpg">
 
 
 <%@page import ="java.util.*"%>
@@ -24,8 +49,8 @@
 <%@page import ="javax.servlet.ServletException"  %>
 <%@page import ="javax.servlet.annotation.WebServlet"  %>
 <%@page import ="java.sql.PreparedStatement" %>
-<%@page import="tour.server.DBConnection" %>
-<%@page session="false" %>
+<%@page import="tour.connection.DBConnection" %>
+<%@page session="false"%>
 
 
 <% 
@@ -68,7 +93,7 @@ try
     	  %>
     	  
     	      <form action=PassengerDetails.jsp method="post">
-    		  <table>
+    		  <table align=center>
     		  <tr>
     		  <th>Flightid</th>
     		  <th>Source</th>
@@ -104,8 +129,8 @@ try
     	<% 	  
     	  }
           %>
-          </table>
-          <input type="submit" value="Confirm">
+          </table><br><br><br>
+          <input id="submit" type="submit" value="Confirm">
            </form>
            <%         
     	  }
@@ -114,7 +139,7 @@ try
     	  {
     		  %>
     		  There are no flights available for this selected date.Please try at a later date.
-    		  <a href=CreateTrip.jsp><button>Go Back</button></a>
+    		  <a href=homepage.html ><button>Go Back</button></a>
     <% 		  
     	  }
     	  

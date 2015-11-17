@@ -10,7 +10,7 @@ public class CreateTripTest {
 	public void test() {
 		int a;
 		SeatCheck seat= new SeatCheck();
-		a=seat.check(11);
+		a=seat.check("Mumbai","Paris","2015-11-25",40);
 		assertEquals(1,a);
 	}
 

@@ -1,4 +1,4 @@
-package tour.server;
+package tour.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,6 @@ public class DBConnection {
 	private Connection connection;
 	public Connection ConnectionManager()throws ClassNotFoundException,SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
-		System.out.println("Driver found");
 		String url="jdbc:mysql://localhost/tour";
 		String user="root";
 		String password="achyut";

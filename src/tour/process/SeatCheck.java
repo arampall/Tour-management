@@ -4,11 +4,13 @@ import java.sql.Connection;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import tour.connection.DBConnection;
+
 import java.sql.ResultSet;
-import tour.server.DBConnection;
 
 public class SeatCheck {
-	public int check(int seats_number) {
+	public int check(String Source,String Destination, String Depdate,int seats_number) {
 		int flag = 0;
 		try {
 			Connection con;
@@ -16,12 +18,12 @@ public class SeatCheck {
 			con = db.ConnectionManager();
 
 			PreparedStatement pstmt = null;
-			String sqlString = "select * from flight where source=? and destination=? and depdate=? and seats>=?";
+			String sqlString = "select * from flight where source=? and destination=? and depature_date=? and availability>=?";
 			try {
 				pstmt = con.prepareStatement(sqlString);
-				pstmt.setString(1, "Mumbai");
-				pstmt.setString(2, "NewYork");
-				pstmt.setString(3, "2015-11-24");
+				pstmt.setString(1, Source);
+				pstmt.setString(2, Destination);
+				pstmt.setString(3, Depdate);
 				pstmt.setInt(4, seats_number);
 				ResultSet rs = pstmt.executeQuery();
 				if (rs.next()) {
