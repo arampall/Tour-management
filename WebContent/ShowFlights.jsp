@@ -13,7 +13,6 @@
   td{
      margin:0;
      background-color:white;
-     border-left:1px solid black;
      text-size:1.1em;
      padding:10px;
   }
@@ -75,7 +74,7 @@ try
 		  
 		  
 		  PreparedStatement pstmt=null;
-	      String sqlString = "select * from flight where source=? and destination=? and depature_date=? and availability>=?";
+	      String sqlString = "select * from flight where source=? and destination=? and departure_date=? and availability>=?";
 	      pstmt = con.prepareStatement(sqlString);
     	  pstmt.setString(1, source);
     	  pstmt.setString(2,destination);
@@ -118,13 +117,13 @@ try
     		  <td><% out.println(rs.getString("source")); %></td>
     		  <td><% out.println(rs.getString("destination")); %></td>
     		  <td><% out.println(rs.getString("flightname")); %></td>
-    		  <td><% out.println(rs.getString("depature_date")); %></td>
+    		  <td><% out.println(rs.getString("departure_date")); %></td>
     		  <td><% out.println(rs.getString("departure_time")); %></td>
     		  <td><% out.println(rs.getString("arrival_date")); %></td>
     		  <td><% out.println(rs.getString("arrival_time")); %></td>
     		  <td><% out.println(rs.getString("price")); %></td>
     		  <td><%out.println(rs.getString("availability"));%></td>
-    		  <td><input type="radio" name="select"  value=<% out.println(rs.getString("flightid")); %>  ></td>
+    		  <td><input type="radio" name="flight"  value=<% out.println(rs.getString("flightid")); %>  ></td>
     		  </tr> 		  
     	<% 	  
     	  }
