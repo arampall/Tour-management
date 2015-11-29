@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<style>
+    body{
+   margin:0;
+    }
+    #top{
+      height:40px;
+      background-color:#FD7D05;
+      padding:5px 20px 0 10px;
+      border-bottom:1px solid black;
+    }
+    .button{
+        float:right;
+        margin: 0 10px 0 0 ;
+     }
+    span{
+        font-size:1.2em;
+        font-family:Comic Sans M;
+    }
+#centre
+
+{
+
+height:800px;
+
+}
+#first
+{
+   position:relative;
+   top:150px;
+   left:500px;
+}
+#last
+{
+   position:relative;
+   top:250px;  
+   left:155px;
+}
+#dest{
+  position:relative;
+  top:350px;
+  left:-180px;
+}
+#frame{
+   position:absolute;
+   z-index:3;
+   top:150px;
+   left:450px;
+   height:400px;
+   width:500px;
+   border:1px solid black;
+   display:none;
+   
+}
+</style>
+</head>
+<body background="http://fullhdpictures.com/wp-content/uploads/2015/03/HD-New-York-Pictures.jpg">
+<div>
+<div id="top">
+<span><strong><font size="5">welcome!!</font></strong></span>
+<div class="button">
+<button><font size="3">logout</font></button></div>
+<div class="button">
+<a href="view.jsp"><button><font size="3">profile</font></button></a></div>
+</div>
+<div id="centre">
+<a href="BookingHistory.jsp"><button id="first"><font size="6">View previous bookings</font></button></a>
+<button id="last" onclick="frame()"><font size="6">Create a new booking</font></button>
+<a href="Destinations.html"><button id="dest"><font size="6">View Destinations</font></button></a>
+<iframe id="frame" src="CreateTrip.jsp"></iframe>
+</div>
+</div>
+<script>
+        function frame(){
+        	document.getElementById("frame").style.display="block";
+        	
+        }
+</script>
+</body>
+</html>
