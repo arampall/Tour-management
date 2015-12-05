@@ -36,8 +36,7 @@
 </head>
 <body>
 <div id="content">
-    <table align=center>
-    <tr><th>Source</th><th>Destination</th><th>Flight</th><th>Date Of Departure</th><th>Time Of Travel</th><th>Price</th><th>Accomodation Availed</th></tr>
+    
 <%@page import  = "java.util.*"%>
 <%@page import ="java.io.IOException" %>
 <%@page import ="java.io.PrintWriter" %>
@@ -69,11 +68,13 @@ try {
     System.out.println(customerid);
     System.out.println(value);
     PreparedStatement pstmt=null;					
-	String booking="select * from booking where customerid=?";
+	String booking="select * from booking where customerid=? and status=?" ;
 	pstmt=con.prepareStatement(booking);
     pstmt.setInt(1, value);
+    pstmt.setString(2, "closed");
     ResultSet rs=pstmt.executeQuery();
     
+    int booking_id;
     String flight_name;
     String source;
     String destination;
@@ -81,8 +82,11 @@ try {
     String departure_time;
     float price;
     String accomodation;
- 
-  	  
+    String Status;
+ %>
+ <table align=center>
+    <tr><th>Source</th><th>Destination</th><th>Flight</th><th>Date Of Departure</th><th>Time Of Travel</th><th>Price</th><th>Accomodation Availed</th><th>Status</tr>
+  <%	  
   	  while(rs.next())
 	      {
   		      flight_name=rs.getString("flight_name");
@@ -92,6 +96,7 @@ try {
 	    	  departure_time=rs.getString("departuretime");
 	    	  price=rs.getFloat("price");
 	    	  accomodation=rs.getString("accomodation");
+	    	  Status=rs.getString("status");
 	    	  System.out.println(flight_name);
 	    	  %>
 
@@ -103,6 +108,7 @@ try {
 	     <td> <%out.println(departure_time);%> </td>
 	     <td> <%out.println(price);%> </td>
 	     <td> <%out.println(accomodation);%> </td>
+	     <td> <%out.println(Status);%> </td>
 	     </tr>
 	     
 	    
@@ -110,8 +116,55 @@ try {
 	    	  
 	    	  <%
 	      }
-	      
-          
+	      %>
+</table>
+<br><br>
+<form action="">
+<table align=center>
+    <tr><th>Select</th><th>Source</th><th>Destination</th><th>Flight</th><th>Date Of Departure</th><th>Time Of Travel</th><th>Price</th><th>Accomodation Availed</th><th>Status</tr>
+  <%
+    PreparedStatement pstmt1=null;					
+	String booking1="select * from booking where customerid=? and status=?" ;
+	pstmt=con.prepareStatement(booking);
+    pstmt.setInt(1, value);
+    pstmt.setString(2, "open");
+    ResultSet rs_open=pstmt.executeQuery();
+  	  while(rs_open.next())
+	      {
+  		      flight_name=rs_open.getString("flight_name");
+	    	  source=rs_open.getString("source");
+	    	  destination=rs_open.getString("destination");
+	    	  journey_date=rs_open.getString("journeydate");
+	    	  departure_time=rs_open.getString("departuretime");
+	    	  price=rs_open.getFloat("price");
+	    	  accomodation=rs_open.getString("accomodation");
+	    	  Status=rs_open.getString("status");
+	    	  booking_id=rs_open.getInt("booking_id");
+	    	  System.out.println(flight_name);
+	    	  %>
+
+	     <tr>
+	     <td><input type="radio" value="booking_id"></td>
+	     <td> <%out.print(source);%> </td>
+	     <td><%out.println(destination);  %></td>
+	     <td> <%out.println(flight_name);%> </td>
+	     <td> <%out.println(journey_date);%> </td>
+	     <td> <%out.println(departure_time);%> </td>
+	     <td> <%out.println(price);%> </td>
+	     <td> <%out.println(accomodation);%> </td>
+	     <td> <%out.println(Status);%> </td>
+	     </tr>
+	     
+	    
+	 
+	    	  
+	    	  <%
+	      }
+	      %>
+</table>
+<input type=submit id="cancel" value="Cancel">
+</form>
+<%         
 } 
 catch(SQLException e)
 {
@@ -123,7 +176,7 @@ catch(ClassNotFoundException e)
      System.out.println("Driver not found");
 }
 %>
-</table>
+
 </div>
 </body>
 </html>

@@ -41,6 +41,17 @@
         margin-right:20px;
         width:150px;
      }
+     #frame{
+        position:absolute;
+        background-color:#F2F2F2;
+        top:30%;
+        left:40%;
+        height:150px;
+        width:320px;
+        border:1px solid black;
+        z-index:3;
+        display:none;
+     }
 </style>
 </head>
 <%@page import="java.util.*"%>
@@ -61,8 +72,8 @@
 		int i = (Integer) session.getAttribute("number");
 		int a = 1;
 	%>
-
-	<form action="Accomodation.jsp" method="get">
+    <iframe id="frame" src="" name="choice"></iframe>
+	<form id="pass" action="AccommodationChoice.jsp" method="get" target="choice">
 		<table align=center>
 			<tr>
 				<th></th>
@@ -101,10 +112,14 @@
 	</form>
 
 
+<script type="text/javascript">
 
+       document.getElementById("pass").onsubmit=function(event){
+              document.getElementById("frame").style.display="block";
+              document.getElementById("pass").style.opacity="0.2";
+       }
 
-
-
-
+</script>
+      
 </body>
 </html>

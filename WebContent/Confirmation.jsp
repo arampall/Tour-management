@@ -52,21 +52,7 @@ th {
 				int n = (Integer) session.getAttribute("number");
 				String hotel_id = request.getParameter("hotelbook");
 				session.setAttribute("hotel_id", hotel_id);
-				String passenger_info;
-				for (int i = 1; i <= n; i++) {
-					passenger_info = request.getParameter("fn" + i);
-					session.setAttribute("fn" + i, passenger_info);
-					passenger_info = request.getParameter("ln" + i);
-					session.setAttribute("ln" + i, passenger_info);
-					passenger_info = request.getParameter("age" + i);
-					session.setAttribute("age" + i, passenger_info);
-					passenger_info = request.getParameter("gender" + i);
-					session.setAttribute("gender" + i, passenger_info);
-				}
-				for (int i = 1; i <= n; i++) {
-					String fn = (String) session.getAttribute("fn" + i);
-					System.out.println("------------" + fn);
-				}
+				System.out.println("---------------" + hotel_id);
 				PreparedStatement pstmt = null;
 		%>
 		<table>
@@ -149,38 +135,76 @@ th {
 		</table>
 		<h3>Passenger Details</h3>
 		<table>
-		<%
-			for (int i = 1; i <= n; i++) {
-		%>
-		<tr>
-			<td>
-				<%
-					out.println(request.getParameter("fn" + i));
-				%>
-			</td>
-			<td>
-				<%
-					out.println(request.getParameter("ln" + i));
-				%>
-			</td>
-			<td>
-				<%
-					out.println(request.getParameter("age" + i));
-				%>
-			</td>
-			<td>
-				<%
-					out.println(request.getParameter("gender" + i));
-				%>
-			</td>
-		</tr>
+			<%
+				for (int i = 1; i <= n; i++) {
+			%>
+			<tr>
+				<td>
+					<%
+						out.println((String) session.getAttribute("fn" + i));
+					%>
+				</td>
+				<td>
+					<%
+						out.println((String) session.getAttribute("ln" + i));
+					%>
+				</td>
+				<td>
+					<%
+						out.println((String) session.getAttribute("age" + i));
+					%>
+				</td>
+				<td>
+					<%
+						out.println((String) session.getAttribute("gender" + i));
+					%>
+				</td>
+			</tr>
 
-		<%
-			}
-		%>
+			<%
+				}
+			%>
 		</table>
-			<a href="#"><button type="button" >Confirm</button></a>
-	        <a href="homepage.html"><button type="button" >Start a new Booking</button></a>
+		<h3>Accommodation Details</h3>
+		<table>
+			<%
+				String hotel_info = "select * from accomodation where ID=?";
+					pstmt = con.prepareStatement(hotel_info);
+					pstmt.setString(1, hotel_id);
+					ResultSet rs1 = pstmt.executeQuery();
+
+					String hotel_name;
+					String room_type;
+					String checkin;
+
+					while (rs1.next()) {
+						hotel_name = rs1.getString("Hotel_name");
+						/*sourc = rs1.getString("source");
+						destinatio = rs1.getString("destination");
+						journey_dat = rs1.getString("departure_date");
+						arrival_dat = rs1.getString("arrival_date");
+						departure_tim = rs1.getString("departure_time");
+						arrival_tim = rs1.getString("arrival_time");
+						pric = rs1.getFloat("price");*/
+			%>
+
+			<tr>
+
+				<td>
+					<%
+						out.println(hotel_name);
+					%>
+				</td>
+			</tr>
+
+
+
+
+			<%
+				}
+			%>
+		</table>
+		
 		<%
 			} catch (SQLException e) {
 				System.out.println(e);
