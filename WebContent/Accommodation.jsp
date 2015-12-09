@@ -92,7 +92,7 @@ button{
 					</p>
 					<p>Distance from airport: 1.5miles</p>
 					<button type=submit name="hotelbook"
-						value="<%out.println(rs.getString("ID"));%>" form="hotel">Book</button>
+						value="<%=rs.getString("ID")%>" form="hotel">Book</button>
 				</div></td>
 
 		</tr>

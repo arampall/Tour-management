@@ -36,6 +36,7 @@ input
  height:40px;
  background-color:#088A08;
  font-size:1.2em;
+ color:white;
  font-weight:bold;
 }
 #dest{
@@ -63,14 +64,13 @@ height:500px;
   }
   function frame(){
   	document.getElementById("frame").style.display="block";
-  	
-  	
+  	document.getElementById("container").style.opacity="0.2"; 	
   	
   }
   
 </script>
 <iframe id="frame" src=" " name="createtrip"></iframe>
-<div id="page">
+<div id="container">
 <form action="CreateTrip.jsp" target="createtrip">
 <div>
 <iframe id="dest" name="destinations" src=" " width="400" height="600"></iframe>

@@ -90,9 +90,9 @@
 			<tr>
 				<td id="label">Passenger <%=a%>
 				</td>
-				<td><input type="text" name="fn<%=a%>"></td>
-				<td><input type="text" name="ln<%=a%>"></td>
-				<td><input class="smallinput" type="text" name="age<%=a%>"></td>
+				<td><input type="text" name="fn<%=a %>" required></td>
+				<td><input type="text" name="ln<%=a%>" required></td>
+				<td><input class="smallinput" type="text" name="age<%=a%>" required></td>
 				<td><select class="smallinput" name="gender<%=a%>"><option value=Male>Male</option><option value=Female>Female</option></select></td>
 			</tr>
 

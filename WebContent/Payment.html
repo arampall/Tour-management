@@ -1,0 +1,98 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Signing up</title>
+<script type="text/javascript" src="jquery-min.js"></script>
+<style>
+#form {
+	background-color: #FAFAFA;
+	width: 500px;
+	height: 300px;
+	padding: 80px 0 0 40px;
+	margin-left: 400px;
+	border-radius: 3px;
+}
+
+input {
+	width: 300px;
+	height: 20px;
+	padding: 0px 5 4px 5px;
+	margin: 5px 40px 5px 30px;
+	float: right;
+	border-radius: 3px;
+	border: 1px solid #6E6E6E;
+	font-size: 1.1em;
+}
+
+#create {
+	width: 308px;
+	margin-top: 10px;
+	height: 40px;
+	float: right;
+	border: 2px solid green;
+	background-color: green;
+	color: #FAFAFA;
+	font-size: 1.1em;
+}
+</style>
+</head>
+<body background="http://wgts.org/wp-content/uploads/EasyPay-NEW.jpg">
+	<h1>
+		<center>Billing Information</center>
+	</h1>
+	<form name="myform" action="acknowledge.jsp" method="post" onsubmit=" return validateForm()">
+		<div id="form">
+			Card number :<input type="text" id="card" name="cardno" required><br></br>
+			Name on the card:<input type="text" name="cardname" required><br>
+			<br> Expiry date :<input type="date" id="date" name="expiry" required><br>
+			<br> Cvv :<input type="password" name="cvv" required><br>
+			<br> <input id="create" type="submit" value="submit">
+		</div>
+	</form>
+	<script>
+		var flag = 0;
+		var d = new Date();
+		var dd = d.getDate();
+		var mm = d.getMonth() + 1;
+		var yyyy = d.getFullYear();
+		if (dd < 10) {
+			dd = '0' + dd;
+		}
+		if (mm < 10) {
+			mm = '0' + mm;
+		}
+		d = yyyy + '-' + mm + '-' + dd;
+		document.getElementById("date").min=d;
+		function validateForm() {
+
+			var cardnumber = document.forms["myform"]["cardno"].value;
+			var givencvv = document.forms["myform"]["cvv"].value;
+			function isValidCardNumber(cardnumber) {
+
+				var card_regex = /^\d{16}$/;
+				return card_regex.test(cardnumber);
+			}
+			function isValidCVV(givencvv) {
+
+				var card_regex = /^\d{3}$/;
+				return card_regex.test(givencvv);
+			}
+			if (!isValidCardNumber(cardnumber)) {
+				flag = 1;
+				alert("Enter valid Credit card number");
+			}
+			if (!isValidCVV(givencvv)) {
+				flag = 1;
+				alert("Enter valid CVV");
+			}
+			if (flag == 1) {
+				return false;
+			} else
+				return true;
+		}
+	</script>
+</body>
+</html>

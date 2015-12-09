@@ -18,6 +18,10 @@ th {
 	font-size: 1.2em;
 	background-color: #E6E6E6;
 }
+button{
+    width:150px;
+    padding:5px;
+}
 </style>
 </head>
 <body>
@@ -51,8 +55,7 @@ th {
 				String flight = (String) session.getAttribute("flight");
 				int n = (Integer) session.getAttribute("number");
 				String hotel_id = request.getParameter("hotelbook");
-				session.setAttribute("hotel_id", hotel_id);
-				System.out.println("---------------" + hotel_id);
+				session.setAttribute("hotel_id",hotel_id);
 				PreparedStatement pstmt = null;
 		%>
 		<table>
@@ -122,6 +125,7 @@ th {
 				<td>
 					<%
 						out.println(price);
+					    session.setAttribute("flight_price", price);
 					%>
 				</td>
 			</tr>
@@ -168,24 +172,23 @@ th {
 		<h3>Accommodation Details</h3>
 		<table>
 			<%
-				String hotel_info = "select * from accomodation where ID=?";
-					pstmt = con.prepareStatement(hotel_info);
-					pstmt.setString(1, hotel_id);
-					ResultSet rs1 = pstmt.executeQuery();
+				    String hotel_info = "select * from accomodation where ID=?";
+			        PreparedStatement pstmt1 = null;
+					pstmt1 = con.prepareStatement(hotel_info);
+					pstmt1.setString(1,hotel_id);
+					ResultSet rs1 = pstmt1.executeQuery();
 
 					String hotel_name;
 					String room_type;
 					String checkin;
+					float hotel_price;
 
 					while (rs1.next()) {
 						hotel_name = rs1.getString("Hotel_name");
-						/*sourc = rs1.getString("source");
-						destinatio = rs1.getString("destination");
-						journey_dat = rs1.getString("departure_date");
-						arrival_dat = rs1.getString("arrival_date");
-						departure_tim = rs1.getString("departure_time");
-						arrival_tim = rs1.getString("arrival_time");
-						pric = rs1.getFloat("price");*/
+						room_type = rs1.getString("Roomtype");
+						checkin = rs1.getString("Check_in");
+						hotel_price=rs1.getFloat("price");
+						session.setAttribute("hotel_price", hotel_price);
 			%>
 
 			<tr>
@@ -195,6 +198,24 @@ th {
 						out.println(hotel_name);
 					%>
 				</td>
+
+				<td>
+					<%
+						out.println(room_type);
+					%>
+				</td>
+
+				<td>
+					<%
+						out.println(checkin);
+					%>
+				</td>
+				
+				<td>
+					<%  
+						out.println(hotel_price);  
+					%>
+				</td>
 			</tr>
 
 
@@ -202,6 +223,8 @@ th {
 
 			<%
 				}
+					float totalprice = 0;
+				   
 			%>
 		</table>
 		
@@ -215,5 +238,7 @@ th {
 			}
 		%>
 	</div>
+	<a href="Payment.html"><button>Confirm</button></a>
+	<a href=""><button>Start a New Trip</button></a>
 </body>
 </html>

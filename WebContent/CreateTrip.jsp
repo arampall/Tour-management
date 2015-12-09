@@ -155,6 +155,7 @@ catch(ClassNotFoundException e)
     function close(){
         var frame=window.parent.document;
         frame.getElementById("frame").style.display="none";
+        frame.getElementById("container").style.opacity="1";
     }    
 </script>
 </body>
